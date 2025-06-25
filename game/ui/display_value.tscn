@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://bjl3bk1ovts3r"]
+
+[ext_resource type="FontFile" uid="uid://b5rorpqfmljwy" path="res://assets/nasin-nanpa-4.0.0-UCSUR.otf" id="1_ck3s2"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tpx34"]
+font = ExtResource("1_ck3s2")
+
+[node name="BoxContainer" type="BoxContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "󱤲"
+label_settings = SubResource("LabelSettings_tpx34")
+
+[node name="Label2" type="Label" parent="."]
+layout_mode = 2
+text = "123"
+label_settings = SubResource("LabelSettings_tpx34")
