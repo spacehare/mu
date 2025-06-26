@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://k516ipke041h"]
+[gd_scene load_steps=29 format=3 uid="uid://k516ipke041h"]
 
 [ext_resource type="FontFile" uid="uid://b5rorpqfmljwy" path="res://assets/nasin-nanpa-4.0.0-UCSUR.otf" id="1_5un7r"]
 [ext_resource type="Script" uid="uid://g3a7vsdq4pna" path="res://game/debug.gd" id="1_xkbyp"]
@@ -13,6 +13,8 @@
 [ext_resource type="Script" uid="uid://binaxso8s26fu" path="res://game/path_preview.gd" id="6_dgpao"]
 [ext_resource type="Texture2D" uid="uid://cnvtuu408pq30" path="res://assets/textures/bg_level1.png" id="6_wjctj"]
 [ext_resource type="Script" uid="uid://5m2oixuudxtq" path="res://game/level.gd" id="7_g6fv7"]
+[ext_resource type="Script" uid="uid://3ixnbicnkmx6" path="res://game/tower_info.gd" id="10_frwyw"]
+[ext_resource type="Script" uid="uid://cams685fgx1as" path="res://game/ability.gd" id="11_yyxey"]
 
 [sub_resource type="Curve2D" id="Curve2D_5un7r"]
 _data = {
@@ -58,6 +60,17 @@ speed = 32.0
 hp = 32
 avatar = ExtResource("2_vop5m")
 metadata/_custom_type_script = "uid://cgogxsef3pau0"
+
+[sub_resource type="Resource" id="Resource_tv0fx"]
+script = ExtResource("10_frwyw")
+title = ""
+cost = 1
+cooldown = 2.0
+metadata/_custom_type_script = "uid://3ixnbicnkmx6"
+
+[sub_resource type="Resource" id="Resource_017dk"]
+script = ExtResource("11_yyxey")
+metadata/_custom_type_script = "uid://cams685fgx1as"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5un7r"]
 radius = 256.0
@@ -119,12 +132,16 @@ autostart = true
 [node name="Tower" type="Node2D" parent="."]
 position = Vector2(1624, 533)
 script = ExtResource("2_5un7r")
+info = SubResource("Resource_tv0fx")
+ability = SubResource("Resource_017dk")
 
 [node name="Sprite2D" type="Sprite2D" parent="Tower"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_vop5m")
 
 [node name="AreaAttack" type="Area2D" parent="Tower"]
+collision_layer = 0
+collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Tower/AreaAttack"]
 shape = SubResource("CircleShape2D_5un7r")

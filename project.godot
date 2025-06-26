@@ -43,6 +43,10 @@ debug_spawn_foe={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_4="foes"
+
 [rendering]
 
 renderer/rendering_method="gl_compatibility"

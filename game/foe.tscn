@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://go85s4djs03h"]
+[gd_scene load_steps=4 format=3 uid="uid://go85s4djs03h"]
 
 [ext_resource type="Script" uid="uid://csn6cx3m337w0" path="res://game/foe.gd" id="1_atwcf"]
 [ext_resource type="Texture2D" uid="uid://b5tq5f7wqu706" path="res://assets/icon_color.svg" id="2_qhw3c"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_atwcf"]
+radius = 64.0
 
 [node name="Foe" type="Node2D"]
 script = ExtResource("1_atwcf")
@@ -9,3 +12,11 @@ script = ExtResource("1_atwcf")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.107422, 0.101563)
 texture = ExtResource("2_qhw3c")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("CircleShape2D_atwcf")
+debug_color = Color(0.892771, 0.00022968, 0.786225, 0.42)
