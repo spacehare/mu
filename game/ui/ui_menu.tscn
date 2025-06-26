@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://b44tflaatbx1x"]
+
+[ext_resource type="Script" uid="uid://b1vlnwlrmetyh" path="res://game/ui/ui_menu.gd" id="1_ts2ik"]
+[ext_resource type="PackedScene" uid="uid://cj01nf4mwlwxa" path="res://game/ui/ui_settings_slider.tscn" id="1_yta2s"]
+[ext_resource type="Texture2D" uid="uid://b5tq5f7wqu706" path="res://assets/icon_color.svg" id="3_xvrjb"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ts2ik")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.283653, 0.353993, 0.251225, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "󱤪󱤈󱥣"
+
+[node name="SliderMaster" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("1_yta2s")]
+unique_name_in_owner = true
+layout_mode = 2
+title = "󱤕󱤤"
+
+[node name="SliderMusic" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("1_yta2s")]
+unique_name_in_owner = true
+layout_mode = 2
+title = "󱤕󱤻"
+
+[node name="SliderSfx" parent="MarginContainer/HBoxContainer/VBoxContainer" instance=ExtResource("1_yta2s")]
+unique_name_in_owner = true
+layout_mode = 2
+title = "󱤕󱤌"
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+texture = ExtResource("3_xvrjb")
+expand_mode = 4

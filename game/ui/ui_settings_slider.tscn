@@ -1,0 +1,21 @@
+[gd_scene load_steps=2 format=3 uid="uid://cj01nf4mwlwxa"]
+
+[ext_resource type="Script" uid="uid://c1gb5n6axkjhl" path="res://game/ui/ui_settings_slider.gd" id="1_t3c5c"]
+
+[node name="UiSettingsSlider" type="BoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_t3c5c")
+title = "󱤕"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "abcd"
+
+[node name="HSlider" type="HSlider" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4

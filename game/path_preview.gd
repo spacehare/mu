@@ -1,6 +1,6 @@
 extends Node
 
-@export var speed := 64.0
+@export var speed := 256.0
 @export var path_follow = self
 
 
