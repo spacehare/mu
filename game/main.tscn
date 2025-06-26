@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://k516ipke041h"]
+[gd_scene load_steps=31 format=3 uid="uid://k516ipke041h"]
 
 [ext_resource type="FontFile" uid="uid://b5rorpqfmljwy" path="res://assets/nasin-nanpa-4.0.0-UCSUR.otf" id="1_5un7r"]
 [ext_resource type="Script" uid="uid://g3a7vsdq4pna" path="res://game/debug.gd" id="1_xkbyp"]
@@ -14,7 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://cnvtuu408pq30" path="res://assets/textures/bg_level1.png" id="6_wjctj"]
 [ext_resource type="Script" uid="uid://5m2oixuudxtq" path="res://game/level.gd" id="7_g6fv7"]
 [ext_resource type="Script" uid="uid://3ixnbicnkmx6" path="res://game/tower_info.gd" id="10_frwyw"]
+[ext_resource type="Script" uid="uid://5l0peb3midk2" path="res://game/effect.gd" id="11_tv0fx"]
 [ext_resource type="Script" uid="uid://cams685fgx1as" path="res://game/ability.gd" id="11_yyxey"]
+[ext_resource type="Script" uid="uid://uwsf3ltunoal" path="res://game/effects/damage_foe.gd" id="12_tv0fx"]
 
 [sub_resource type="Curve2D" id="Curve2D_5un7r"]
 _data = {
@@ -46,18 +48,11 @@ scale_max = 12.0
 scale_curve = SubResource("CurveTexture_itumj")
 alpha_curve = SubResource("CurveTexture_wjctj")
 
-[sub_resource type="Resource" id="Resource_li27q"]
-script = ExtResource("4_li27q")
-title = ""
-speed = 512.0
-hp = 1
-metadata/_custom_type_script = "uid://cgogxsef3pau0"
-
 [sub_resource type="Resource" id="Resource_g6fv7"]
 script = ExtResource("4_li27q")
 title = "wawa"
-speed = 32.0
-hp = 32
+speed = 512.0
+hp = 3
 avatar = ExtResource("2_vop5m")
 metadata/_custom_type_script = "uid://cgogxsef3pau0"
 
@@ -68,8 +63,14 @@ cost = 1
 cooldown = 2.0
 metadata/_custom_type_script = "uid://3ixnbicnkmx6"
 
+[sub_resource type="Resource" id="Resource_8ymx4"]
+script = ExtResource("12_tv0fx")
+damage_amount = 1
+metadata/_custom_type_script = "uid://uwsf3ltunoal"
+
 [sub_resource type="Resource" id="Resource_017dk"]
 script = ExtResource("11_yyxey")
+effects = Array[ExtResource("11_tv0fx")]([SubResource("Resource_8ymx4")])
 metadata/_custom_type_script = "uid://cams685fgx1as"
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5un7r"]
@@ -84,6 +85,9 @@ line_spacing = 0.0
 font_size = 96
 
 [node name="Main" type="Node"]
+
+[node name="Debug" type="Node" parent="."]
+script = ExtResource("1_xkbyp")
 
 [node name="Level" type="Node2D" parent="."]
 script = ExtResource("7_g6fv7")
@@ -111,13 +115,6 @@ process_material = SubResource("ParticleProcessMaterial_5un7r")
 position = Vector2(-15, 683)
 rotation = 0.211512
 loop = false
-
-[node name="Foe" parent="Level/Route/PathFollow2D" node_paths=PackedStringArray("follow") instance=ExtResource("5_li27q")]
-follow = NodePath("..")
-info = SubResource("Resource_li27q")
-
-[node name="Debug" type="Node" parent="."]
-script = ExtResource("1_xkbyp")
 
 [node name="FoeManager" type="Node" parent="." node_paths=PackedStringArray("path", "level")]
 script = ExtResource("2_ioaqv")

@@ -1,42 +1,50 @@
 extends Node2D
 class_name Tower
 
-@export var info: TowerInfo
 @onready var area_attack: Area2D = $AreaAttack
 var targets: Array[Node2D] = []
 var cooldown: SpanFloat = SpanFloat.new()
+@export var info: TowerInfo
 @export var ability: Ability
 
 
 func _ready():
-	area_attack.body_entered.connect(_on_body_entered)
-	area_attack.body_exited.connect(_on_foe_exited)
-	cooldown.current = 0.0
+	area_attack.body_entered.connect(_on_node_entered)
+	area_attack.body_exited.connect(_on_node_exited)
+	area_attack.area_entered.connect(_on_node_entered)
+	area_attack.area_exited.connect(_on_node_exited)
 	cooldown.minimum = 0.0
 	cooldown.maximum = info.cooldown
+	cooldown.current = 0.0
 
 
-func _on_body_entered(body: Node2D):
-	var parent = body.get_parent()
+func _on_node_entered(col: Node2D):
+	var parent = col.get_parent()
 	if parent is Foe:
 		targets.append(parent)
-		parent.died.connect(remove_target.bind(parent))
 
 
-func _on_foe_exited(body: Node2D):
-	var parent = body.get_parent()
+func _on_node_exited(col: Node2D):
+	var parent = col.get_parent()
 	if parent is Foe:
 		remove_target(parent)
-		parent.died.disconnect(remove_target.bind(parent))
 
 
 func remove_target(target):
+	printt(targets, target)
 	var idx = targets.find(target)
 	targets.remove_at(idx)
 
 
-func use_ability():
-	pass
+func _physics_process(delta):
+	cooldown.current -= delta
+	if targets and cooldown.current == cooldown.minimum:
+		use_ability()
 
-# func attack():
-# 	var target = targets.front()
+
+func use_ability():
+	if not targets.is_empty():
+		print('-- USING ABIL, HAS TARGETS --')
+		var data = AbilityData.new()
+		data.targets = targets
+		ability.do(data)

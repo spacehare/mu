@@ -1,3 +1,5 @@
+@tool
+
 extends Node2D
 class_name Foe
 
@@ -5,6 +7,7 @@ class_name Foe
 @export var info: FoeInfo
 @onready var hp: SpanInt = SpanInt.new()
 @onready var speed: SpanFloat = SpanFloat.new()
+@onready var avatar: Sprite2D = $Sprite2D
 
 
 signal died
@@ -16,9 +19,10 @@ func _ready():
 	hp.minimum = 0
 	hp.maximum = info.hp
 	hp.current = info.hp
-	speed.current = info.speed
-	speed.maximum = info.speed
 	speed.minimum = -512
+	speed.maximum = info.speed
+	speed.current = info.speed
+	avatar.texture = info.avatar
 
 	hp.hit_min.connect(die)
 
@@ -29,4 +33,4 @@ func _process(delta):
 
 func die():
 	died.emit()
-	queue_free()
+	follow.queue_free()

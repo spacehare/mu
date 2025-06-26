@@ -15,12 +15,14 @@ func spawn_foe(foe_info: FoeInfo):
 	# var pos = path.curve.get_point_position(0)
 	var new = foe_scene.instantiate()
 	if new is Foe:
-		level.path.add_child(new)
-		new.setup(level.path)
+		var flw := PathFollow2D.new()
+		new.follow = flw
 		new.info = foe_info
+		path.add_child(flw)
+		flw.add_child(new)
 
 
 func _input(event):
 	if OS.is_debug_build():
-		if event.is_action('debug_spawn_foe'):
+		if event.is_action_pressed('debug_spawn_foe'):
 			spawn_foe(test_info)
