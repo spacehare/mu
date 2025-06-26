@@ -1,3 +1,126 @@
-[gd_scene format=3 uid="uid://k516ipke041h"]
+[gd_scene load_steps=13 format=3 uid="uid://k516ipke041h"]
+
+[ext_resource type="FontFile" uid="uid://b5rorpqfmljwy" path="res://assets/nasin-nanpa-4.0.0-UCSUR.otf" id="1_5un7r"]
+[ext_resource type="PackedScene" uid="uid://bjl3bk1ovts3r" path="res://game/ui/display_value.tscn" id="1_xtpaf"]
+[ext_resource type="Script" uid="uid://b5rdms6a6hsq4" path="res://game/tower.gd" id="2_5un7r"]
+[ext_resource type="Texture2D" uid="uid://4ebf08tu6pyf" path="res://icon.svg" id="2_emt18"]
+[ext_resource type="Texture2D" uid="uid://druweyurvmypc" path="res://assets/textures/jan.png" id="2_vop5m"]
+[ext_resource type="Script" uid="uid://binaxso8s26fu" path="res://game/path_preview.gd" id="6_dgpao"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dgpao"]
+font = ExtResource("1_5un7r")
+font_size = 32
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5un7r"]
+radius = 128.0
+
+[sub_resource type="Curve2D" id="Curve2D_5un7r"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 147, 699, 0, 0, 0, 0, 153, 261, 0, 0, 0, 0, 387, 218, 0, 0, 0, 0, 497, 568, 0, 0, 0, 0, 783, 572, 0, 0, 0, 0, 563, 386, 0, 0, 0, 0, 769, 201, 0, 0, 0, 0, 558, -34)
+}
+point_count = 8
+
+[sub_resource type="Curve" id="Curve_dgpao"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_wjctj"]
+curve = SubResource("Curve_dgpao")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5un7r"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_max = 32.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 2.0
+alpha_curve = SubResource("CurveTexture_wjctj")
 
 [node name="Main" type="Node"]
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="HUD"]
+layout_mode = 0
+offset_left = 936.0
+offset_top = 209.0
+offset_right = 1126.0
+offset_bottom = 336.0
+
+[node name="Label" type="Label" parent="HUD/Button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "󱤋󱥄󱥃"
+label_settings = SubResource("LabelSettings_dgpao")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BoxContainer" type="BoxContainer" parent="HUD"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 11.0
+offset_right = 110.0
+offset_bottom = 51.0
+
+[node name="DisplayValue" parent="HUD/BoxContainer" instance=ExtResource("1_xtpaf")]
+layout_mode = 2
+
+[node name="DisplayValue2" parent="HUD/BoxContainer" instance=ExtResource("1_xtpaf")]
+layout_mode = 2
+
+[node name="Menu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Tower" type="Node2D" parent="."]
+script = ExtResource("2_5un7r")
+
+[node name="Sprite2D" type="Sprite2D" parent="Tower"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_vop5m")
+
+[node name="Area2D" type="Area2D" parent="Tower"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tower/Area2D"]
+shape = SubResource("CircleShape2D_5un7r")
+
+[node name="Foe" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Foe"]
+
+[node name="Node2D" type="Node2D" parent="."]
+visible = false
+
+[node name="Node2D" type="Node2D" parent="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/Node2D"]
+texture = ExtResource("2_emt18")
+
+[node name="Level1" type="Node2D" parent="."]
+
+[node name="Path2D" type="Path2D" parent="Level1"]
+curve = SubResource("Curve2D_5un7r")
+
+[node name="PathPreview" type="PathFollow2D" parent="Level1/Path2D"]
+position = Vector2(147, 699)
+rotation = -1.5571
+script = ExtResource("6_dgpao")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Level1/Path2D/PathPreview"]
+process_material = SubResource("ParticleProcessMaterial_5un7r")

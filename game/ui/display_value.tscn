@@ -5,7 +5,7 @@
 [sub_resource type="LabelSettings" id="LabelSettings_tpx34"]
 font = ExtResource("1_ck3s2")
 
-[node name="BoxContainer" type="BoxContainer"]
+[node name="DisplayValue" type="BoxContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
 

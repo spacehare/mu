@@ -1,26 +1,26 @@
 @tool
 extends Resource
-class_name SpanInt
+class_name SpanFloat
 
-signal updated(span: SpanInt)
+signal updated(span: SpanFloat)
 signal hit_max
 signal hit_min
 
-@export var minimum := 0:
+@export var minimum := 0.0:
 	set(val):
 		if minimum >= maximum:
 			return
 		minimum = val
 		updated.emit(self)
-@export var maximum := 100:
+@export var maximum := 100.0:
 	set(val):
 		if maximum <= minimum:
 			return
 		maximum = val
 		updated.emit(self)
-@export var current := 0:
+@export var current := 0.0:
 	set(val):
-		current = clampi(val, minimum, maximum)
+		current = clampf(val, minimum, maximum)
 		updated.emit(self)
 		if val != current:
 			if current == maximum:
