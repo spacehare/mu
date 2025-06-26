@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://go85s4djs03h"]
+
+[ext_resource type="Script" uid="uid://csn6cx3m337w0" path="res://game/foe.gd" id="1_atwcf"]
+[ext_resource type="Texture2D" uid="uid://b5tq5f7wqu706" path="res://assets/icon_color.svg" id="2_qhw3c"]
+
+[node name="Foe" type="Node2D"]
+script = ExtResource("1_atwcf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.107422, 0.101563)
+texture = ExtResource("2_qhw3c")

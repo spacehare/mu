@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://k516ipke041h"]
+[gd_scene load_steps=25 format=3 uid="uid://k516ipke041h"]
 
 [ext_resource type="FontFile" uid="uid://b5rorpqfmljwy" path="res://assets/nasin-nanpa-4.0.0-UCSUR.otf" id="1_5un7r"]
 [ext_resource type="Script" uid="uid://g3a7vsdq4pna" path="res://game/debug.gd" id="1_xkbyp"]
@@ -7,18 +7,16 @@
 [ext_resource type="Texture2D" uid="uid://4ebf08tu6pyf" path="res://icon.svg" id="2_emt18"]
 [ext_resource type="Script" uid="uid://c0l2ejvwu4sux" path="res://game/manager_foe.gd" id="2_ioaqv"]
 [ext_resource type="Texture2D" uid="uid://druweyurvmypc" path="res://assets/textures/jan.png" id="2_vop5m"]
+[ext_resource type="Script" uid="uid://cgogxsef3pau0" path="res://game/foe_info.gd" id="4_li27q"]
 [ext_resource type="PackedScene" uid="uid://b44tflaatbx1x" path="res://game/ui/ui_menu.tscn" id="4_lx3aj"]
-[ext_resource type="Texture2D" uid="uid://b5tq5f7wqu706" path="res://assets/icon_color.svg" id="5_li27q"]
+[ext_resource type="PackedScene" uid="uid://go85s4djs03h" path="res://game/foe.tscn" id="5_li27q"]
 [ext_resource type="Script" uid="uid://binaxso8s26fu" path="res://game/path_preview.gd" id="6_dgpao"]
 [ext_resource type="Texture2D" uid="uid://cnvtuu408pq30" path="res://assets/textures/bg_level1.png" id="6_wjctj"]
 [ext_resource type="Script" uid="uid://5m2oixuudxtq" path="res://game/level.gd" id="7_g6fv7"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_5un7r"]
-radius = 128.0
-
 [sub_resource type="Curve2D" id="Curve2D_5un7r"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, -17, 679, 0, 0, 0, 0, 148, 718, 0, 0, 0, 0, 932, 940, 0, 0, 0, 0, 1273, 763, 0, 0, 0, 0, 1757, 644, 0, 0, 0, 0, 1754, 379, 0, 0, 0, 0, 1257, 478, 0, 0, 0, 0, 902, 662, 0, 0, 0, 0, 516, 521, 0, 0, 0, 0, 195, 441, 0, 0, 0, 0, 157, 166, 0, 0, 0, 0, 462, 213, 0, 0, 0, 0, 900, 336, 0, 0, 0, 0, 1286, 204, 0, 0, 0, 0, 1955, 123)
+"points": PackedVector2Array(0, 0, 0, 0, -15, 683, 0, 0, 0, 0, 148, 718, 0, 0, 0, 0, 932, 940, 0, 0, 0, 0, 1273, 763, 0, 0, 0, 0, 1757, 644, 0, 0, 0, 0, 1754, 379, 0, 0, 0, 0, 1257, 478, 0, 0, 0, 0, 902, 662, 0, 0, 0, 0, 516, 521, 0, 0, 0, 0, 195, 441, 0, 0, 0, 0, 157, 166, 0, 0, 0, 0, 462, 213, 0, 0, 0, 0, 900, 336, 0, 0, 0, 0, 1286, 204, 0, 0, 0, 0, 1955, 123)
 }
 point_count = 15
 
@@ -46,6 +44,24 @@ scale_max = 12.0
 scale_curve = SubResource("CurveTexture_itumj")
 alpha_curve = SubResource("CurveTexture_wjctj")
 
+[sub_resource type="Resource" id="Resource_li27q"]
+script = ExtResource("4_li27q")
+title = ""
+speed = 512.0
+hp = 1
+metadata/_custom_type_script = "uid://cgogxsef3pau0"
+
+[sub_resource type="Resource" id="Resource_g6fv7"]
+script = ExtResource("4_li27q")
+title = "wawa"
+speed = 32.0
+hp = 32
+avatar = ExtResource("2_vop5m")
+metadata/_custom_type_script = "uid://cgogxsef3pau0"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5un7r"]
+radius = 256.0
+
 [sub_resource type="LabelSettings" id="LabelSettings_dgpao"]
 font = ExtResource("1_5un7r")
 font_size = 32
@@ -56,30 +72,62 @@ font_size = 96
 
 [node name="Main" type="Node"]
 
+[node name="Level" type="Node2D" parent="."]
+script = ExtResource("7_g6fv7")
+
+[node name="Geo" type="Node2D" parent="Level"]
+
+[node name="TextureRect" type="TextureRect" parent="Level/Geo"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+texture = ExtResource("6_wjctj")
+
+[node name="Route" type="Path2D" parent="Level"]
+unique_name_in_owner = true
+curve = SubResource("Curve2D_5un7r")
+
+[node name="PathPreview" type="PathFollow2D" parent="Level/Route"]
+position = Vector2(-15, 683)
+rotation = 0.211512
+script = ExtResource("6_dgpao")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="Level/Route/PathPreview"]
+process_material = SubResource("ParticleProcessMaterial_5un7r")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Level/Route"]
+position = Vector2(-15, 683)
+rotation = 0.211512
+loop = false
+
+[node name="Foe" parent="Level/Route/PathFollow2D" node_paths=PackedStringArray("follow") instance=ExtResource("5_li27q")]
+follow = NodePath("..")
+info = SubResource("Resource_li27q")
+
 [node name="Debug" type="Node" parent="."]
 script = ExtResource("1_xkbyp")
 
-[node name="FoeManager" type="Node" parent="." node_paths=PackedStringArray("path")]
+[node name="FoeManager" type="Node" parent="." node_paths=PackedStringArray("path", "level")]
 script = ExtResource("2_ioaqv")
-path = NodePath("../Level1/Path2D")
+path = NodePath("../Level/Route")
+test_info = SubResource("Resource_g6fv7")
+foe_scene = ExtResource("5_li27q")
+level = NodePath("../Level")
+
+[node name="TimerSpawn" type="Timer" parent="FoeManager"]
+autostart = true
 
 [node name="Tower" type="Node2D" parent="."]
+position = Vector2(1624, 533)
 script = ExtResource("2_5un7r")
 
 [node name="Sprite2D" type="Sprite2D" parent="Tower"]
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_vop5m")
 
-[node name="Area2D" type="Area2D" parent="Tower"]
+[node name="AreaAttack" type="Area2D" parent="Tower"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Tower/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tower/AreaAttack"]
 shape = SubResource("CircleShape2D_5un7r")
-
-[node name="Foe" type="Node2D" parent="."]
-
-[node name="Sprite2D" type="Sprite2D" parent="Foe"]
-scale = Vector2(0.107422, 0.101563)
-texture = ExtResource("5_li27q")
 
 [node name="Node2D" type="Node2D" parent="."]
 visible = false
@@ -88,25 +136,6 @@ visible = false
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D/Node2D"]
 texture = ExtResource("2_emt18")
-
-[node name="Level1" type="Node2D" parent="."]
-script = ExtResource("7_g6fv7")
-
-[node name="TextureRect" type="TextureRect" parent="Level1"]
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("6_wjctj")
-
-[node name="Path2D" type="Path2D" parent="Level1"]
-curve = SubResource("Curve2D_5un7r")
-
-[node name="PathPreview" type="PathFollow2D" parent="Level1/Path2D"]
-position = Vector2(-17, 679)
-rotation = 0.232104
-script = ExtResource("6_dgpao")
-
-[node name="GPUParticles2D" type="GPUParticles2D" parent="Level1/Path2D/PathPreview"]
-process_material = SubResource("ParticleProcessMaterial_5un7r")
 
 [node name="Menu" parent="." instance=ExtResource("4_lx3aj")]
 visible = false
