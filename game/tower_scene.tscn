@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dmg1yl43wwqrp"]
+[gd_scene load_steps=12 format=3 uid="uid://dmg1yl43wwqrp"]
 
 [ext_resource type="Script" uid="uid://b5rdms6a6hsq4" path="res://game/tower.gd" id="1_eqgsg"]
 [ext_resource type="Script" uid="uid://3ixnbicnkmx6" path="res://game/tower_info.gd" id="2_e0l22"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://uwsf3ltunoal" path="res://game/effects/damage_foe.gd" id="4_7me86"]
 [ext_resource type="Script" uid="uid://cams685fgx1as" path="res://game/ability.gd" id="5_hdyyg"]
 [ext_resource type="Texture2D" uid="uid://druweyurvmypc" path="res://assets/textures/jan.png" id="6_nctbk"]
+[ext_resource type="PackedScene" uid="uid://ba5iaiayip4bq" path="res://game/range_preview.tscn" id="7_e0l22"]
 
 [sub_resource type="Resource" id="Resource_tv0fx"]
 script = ExtResource("2_e0l22")
@@ -27,16 +28,6 @@ metadata/_custom_type_script = "uid://cams685fgx1as"
 [sub_resource type="CircleShape2D" id="CircleShape2D_5un7r"]
 radius = 256.0
 
-[sub_resource type="Gradient" id="Gradient_eqgsg"]
-interpolation_mode = 1
-offsets = PackedFloat32Array(0, 0.660569, 0.70935)
-colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.313726, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_e0l22"]
-gradient = SubResource("Gradient_eqgsg")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-
 [node name="Tower" type="Node2D"]
 script = ExtResource("1_eqgsg")
 info = SubResource("Resource_tv0fx")
@@ -53,17 +44,4 @@ collision_mask = 8
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaAttack"]
 shape = SubResource("CircleShape2D_5un7r")
 
-[node name="RectAreaPreview" type="TextureRect" parent="."]
-texture_filter = 2
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -256.0
-offset_top = -256.0
-offset_right = 256.0
-offset_bottom = 256.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = SubResource("GradientTexture2D_e0l22")
+[node name="RangePreview" parent="." instance=ExtResource("7_e0l22")]

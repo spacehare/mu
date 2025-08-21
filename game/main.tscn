@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://k516ipke041h"]
+[gd_scene load_steps=33 format=3 uid="uid://k516ipke041h"]
 
 [ext_resource type="FontFile" uid="uid://b5rorpqfmljwy" path="res://assets/nasin-nanpa-4.0.0-UCSUR.otf" id="1_5un7r"]
 [ext_resource type="Script" uid="uid://g3a7vsdq4pna" path="res://game/debug.gd" id="1_xkbyp"]
@@ -6,13 +6,35 @@
 [ext_resource type="Texture2D" uid="uid://4ebf08tu6pyf" path="res://icon.svg" id="2_emt18"]
 [ext_resource type="Script" uid="uid://c0l2ejvwu4sux" path="res://game/manager_foe.gd" id="2_ioaqv"]
 [ext_resource type="Texture2D" uid="uid://druweyurvmypc" path="res://assets/textures/jan.png" id="2_vop5m"]
+[ext_resource type="Script" uid="uid://bi5wstblww240" path="res://game/shop.gd" id="2_yyxey"]
+[ext_resource type="Script" uid="uid://bxlc5d7pofap4" path="res://game/player.gd" id="3_017dk"]
+[ext_resource type="Script" uid="uid://1ig2dw1ijhkg" path="res://game/span_int.gd" id="4_8ymx4"]
 [ext_resource type="Script" uid="uid://cgogxsef3pau0" path="res://game/foe_info.gd" id="4_li27q"]
 [ext_resource type="PackedScene" uid="uid://b44tflaatbx1x" path="res://game/ui/ui_menu.tscn" id="4_lx3aj"]
 [ext_resource type="PackedScene" uid="uid://go85s4djs03h" path="res://game/foe.tscn" id="5_li27q"]
+[ext_resource type="Script" uid="uid://cyhlfrb8rtjo" path="res://game/selector.gd" id="5_m8y2r"]
 [ext_resource type="Script" uid="uid://binaxso8s26fu" path="res://game/path_preview.gd" id="6_dgpao"]
 [ext_resource type="Texture2D" uid="uid://cnvtuu408pq30" path="res://assets/textures/bg_level1.png" id="6_wjctj"]
 [ext_resource type="Script" uid="uid://5m2oixuudxtq" path="res://game/level.gd" id="7_g6fv7"]
 [ext_resource type="PackedScene" uid="uid://dmg1yl43wwqrp" path="res://game/tower_scene.tscn" id="9_li27q"]
+[ext_resource type="Script" uid="uid://hsvte4s2aq3r" path="res://game/ui/ui_hud.gd" id="12_frwyw"]
+[ext_resource type="Script" uid="uid://ckt1uywxsijl8" path="res://game/ui/ui_button_buy.gd" id="12_g6fv7"]
+[ext_resource type="Resource" uid="uid://ch7km5jf8cnyy" path="res://game/wares/ware_tower_base.tres" id="15_tv0fx"]
+[ext_resource type="Script" uid="uid://dxfege8l5p255" path="res://game/ui/ui_display_container.gd" id="20_le3en"]
+
+[sub_resource type="Resource" id="Resource_m8y2r"]
+script = ExtResource("4_8ymx4")
+minimum = 0
+maximum = 100
+current = 0
+metadata/_custom_type_script = "uid://1ig2dw1ijhkg"
+
+[sub_resource type="Resource" id="Resource_le3en"]
+script = ExtResource("4_8ymx4")
+minimum = 0
+maximum = 999
+current = 10
+metadata/_custom_type_script = "uid://1ig2dw1ijhkg"
 
 [sub_resource type="Curve2D" id="Curve2D_5un7r"]
 _data = {
@@ -65,6 +87,17 @@ font_size = 96
 [node name="Debug" type="Node" parent="."]
 script = ExtResource("1_xkbyp")
 
+[node name="Shop" type="Node" parent="." node_paths=PackedStringArray("level", "player", "selector")]
+script = ExtResource("2_yyxey")
+level = NodePath("../Level")
+player = NodePath("../Player")
+selector = NodePath("../Selector")
+
+[node name="Player" type="Node" parent="."]
+script = ExtResource("3_017dk")
+health = SubResource("Resource_m8y2r")
+money = SubResource("Resource_le3en")
+
 [node name="Level" type="Node2D" parent="."]
 script = ExtResource("7_g6fv7")
 
@@ -91,6 +124,10 @@ process_material = SubResource("ParticleProcessMaterial_5un7r")
 position = Vector2(-15, 683)
 rotation = 0.211512
 loop = false
+
+[node name="Selector" type="Node2D" parent="." node_paths=PackedStringArray("level")]
+script = ExtResource("5_m8y2r")
+level = NodePath("../Level")
 
 [node name="FoeManager" type="Node" parent="." node_paths=PackedStringArray("path", "level")]
 script = ExtResource("2_ioaqv")
@@ -121,15 +158,19 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("12_frwyw")
 
-[node name="Button" type="Button" parent="HUD"]
+[node name="ButtonBuy" type="Button" parent="HUD" node_paths=PackedStringArray("shop")]
 layout_mode = 0
 offset_left = 1646.0
 offset_top = 209.0
 offset_right = 1836.0
 offset_bottom = 336.0
+script = ExtResource("12_g6fv7")
+ware = ExtResource("15_tv0fx")
+shop = NodePath("../../Shop")
 
-[node name="Label" type="Label" parent="HUD/Button"]
+[node name="Label" type="Label" parent="HUD/ButtonBuy"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -165,12 +206,14 @@ text = "󱤤"
 label_settings = SubResource("LabelSettings_lx3aj")
 horizontal_alignment = 1
 
-[node name="BoxContainer" type="BoxContainer" parent="HUD"]
+[node name="BoxContainer" type="BoxContainer" parent="HUD" node_paths=PackedStringArray("player")]
 layout_mode = 0
 offset_left = 14.0
 offset_top = 11.0
 offset_right = 110.0
 offset_bottom = 51.0
+script = ExtResource("20_le3en")
+player = NodePath("../../Player")
 
 [node name="DisplayValue" parent="HUD/BoxContainer" instance=ExtResource("1_xtpaf")]
 layout_mode = 2

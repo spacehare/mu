@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="Ware" load_steps=3 format=3 uid="uid://ch7km5jf8cnyy"]
+
+[ext_resource type="PackedScene" uid="uid://dffxwra1bwgxs" path="res://game/towers/tower_base.tscn" id="1_1jsu7"]
+[ext_resource type="Script" uid="uid://3g2x2dkk2msu" path="res://game/ware.gd" id="1_rb6hj"]
+
+[resource]
+script = ExtResource("1_rb6hj")
+price = 10
+scene = ExtResource("1_1jsu7")
+metadata/_custom_type_script = "uid://3g2x2dkk2msu"
