@@ -1,9 +1,16 @@
 extends BoxContainer
+class_name DisplayValue
 
-@onready var label: Label = $Label2
+@export var text_hint: String
+@onready var label_hint: Label = $Label
+@onready var label_number: Label = $Label2
+
+func _ready():
+	label_hint.text = text_hint
 
 func update_float(value: float) -> void:
-	label.text = str(value)
+	label_number.text = str(value)
 
-func update_span_int(value: SpanInt) -> void:
-	label.text = str(value.current)
+func update_span_int(span: SpanInt) -> void:
+	printt('update_span_int', span.current, label_number.text)
+	label_number.text = "%s" % span.current

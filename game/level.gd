@@ -1,5 +1,5 @@
 extends Node2D
 class_name Level
 
-# TODO add levelInfo var
+@export var info: LevelInfo
 @onready var path: Path2D = %Route

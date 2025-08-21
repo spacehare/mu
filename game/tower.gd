@@ -4,7 +4,7 @@ class_name Tower
 @onready var area_attack: Area2D = $AreaAttack
 var targets: Array[Node2D] = []
 var cooldown: SpanFloat = SpanFloat.new()
-var range: float
+var attack_range: float = 6.0
 @export var info: TowerInfo
 @export var ability: Ability
 
