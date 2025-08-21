@@ -1,0 +1,69 @@
+[gd_scene load_steps=13 format=3 uid="uid://dmg1yl43wwqrp"]
+
+[ext_resource type="Script" uid="uid://b5rdms6a6hsq4" path="res://game/tower.gd" id="1_eqgsg"]
+[ext_resource type="Script" uid="uid://3ixnbicnkmx6" path="res://game/tower_info.gd" id="2_e0l22"]
+[ext_resource type="Script" uid="uid://5l0peb3midk2" path="res://game/effect.gd" id="3_4o1cy"]
+[ext_resource type="Script" uid="uid://uwsf3ltunoal" path="res://game/effects/damage_foe.gd" id="4_7me86"]
+[ext_resource type="Script" uid="uid://cams685fgx1as" path="res://game/ability.gd" id="5_hdyyg"]
+[ext_resource type="Texture2D" uid="uid://druweyurvmypc" path="res://assets/textures/jan.png" id="6_nctbk"]
+
+[sub_resource type="Resource" id="Resource_tv0fx"]
+script = ExtResource("2_e0l22")
+title = ""
+cost = 1
+cooldown = 2.0
+metadata/_custom_type_script = "uid://3ixnbicnkmx6"
+
+[sub_resource type="Resource" id="Resource_8ymx4"]
+script = ExtResource("4_7me86")
+damage_amount = 1
+metadata/_custom_type_script = "uid://uwsf3ltunoal"
+
+[sub_resource type="Resource" id="Resource_017dk"]
+script = ExtResource("5_hdyyg")
+effects = Array[ExtResource("3_4o1cy")]([SubResource("Resource_8ymx4")])
+metadata/_custom_type_script = "uid://cams685fgx1as"
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5un7r"]
+radius = 256.0
+
+[sub_resource type="Gradient" id="Gradient_eqgsg"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.660569, 0.70935)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 0.313726, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_e0l22"]
+gradient = SubResource("Gradient_eqgsg")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="Tower" type="Node2D"]
+script = ExtResource("1_eqgsg")
+info = SubResource("Resource_tv0fx")
+ability = SubResource("Resource_017dk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_nctbk")
+
+[node name="AreaAttack" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AreaAttack"]
+shape = SubResource("CircleShape2D_5un7r")
+
+[node name="RectAreaPreview" type="TextureRect" parent="."]
+texture_filter = 2
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -256.0
+offset_top = -256.0
+offset_right = 256.0
+offset_bottom = 256.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_e0l22")

@@ -15,7 +15,7 @@ func _ready():
 	area_attack.area_exited.connect(_on_node_exited)
 	cooldown.minimum = 0.0
 	cooldown.maximum = info.cooldown
-	cooldown.current = 0.0
+	cooldown.current = cooldown.maximum
 
 
 func _on_node_entered(col: Node2D):
@@ -44,7 +44,7 @@ func _physics_process(delta):
 
 func use_ability():
 	if not targets.is_empty():
-		print('-- USING ABIL, HAS TARGETS --')
+		cooldown.current = cooldown.maximum
 		var data = AbilityData.new()
 		data.targets = targets
 		ability.do(data)

@@ -1,7 +1,9 @@
-[gd_resource type="Resource" script_class="Ability" load_steps=2 format=3 uid="uid://dje4klv84kdsk"]
+[gd_resource type="Resource" script_class="Ability" load_steps=3 format=3 uid="uid://dje4klv84kdsk"]
 
 [ext_resource type="Script" uid="uid://cams685fgx1as" path="res://game/ability.gd" id="1_c5at3"]
+[ext_resource type="Script" uid="uid://5l0peb3midk2" path="res://game/effect.gd" id="1_skv78"]
 
 [resource]
 script = ExtResource("1_c5at3")
+effects = Array[ExtResource("1_skv78")]([])
 metadata/_custom_type_script = "uid://cams685fgx1as"

@@ -1,9 +1,8 @@
-[gd_scene load_steps=31 format=3 uid="uid://k516ipke041h"]
+[gd_scene load_steps=23 format=3 uid="uid://k516ipke041h"]
 
 [ext_resource type="FontFile" uid="uid://b5rorpqfmljwy" path="res://assets/nasin-nanpa-4.0.0-UCSUR.otf" id="1_5un7r"]
 [ext_resource type="Script" uid="uid://g3a7vsdq4pna" path="res://game/debug.gd" id="1_xkbyp"]
 [ext_resource type="PackedScene" uid="uid://bjl3bk1ovts3r" path="res://game/ui/ui_display_value.tscn" id="1_xtpaf"]
-[ext_resource type="Script" uid="uid://b5rdms6a6hsq4" path="res://game/tower.gd" id="2_5un7r"]
 [ext_resource type="Texture2D" uid="uid://4ebf08tu6pyf" path="res://icon.svg" id="2_emt18"]
 [ext_resource type="Script" uid="uid://c0l2ejvwu4sux" path="res://game/manager_foe.gd" id="2_ioaqv"]
 [ext_resource type="Texture2D" uid="uid://druweyurvmypc" path="res://assets/textures/jan.png" id="2_vop5m"]
@@ -13,10 +12,7 @@
 [ext_resource type="Script" uid="uid://binaxso8s26fu" path="res://game/path_preview.gd" id="6_dgpao"]
 [ext_resource type="Texture2D" uid="uid://cnvtuu408pq30" path="res://assets/textures/bg_level1.png" id="6_wjctj"]
 [ext_resource type="Script" uid="uid://5m2oixuudxtq" path="res://game/level.gd" id="7_g6fv7"]
-[ext_resource type="Script" uid="uid://3ixnbicnkmx6" path="res://game/tower_info.gd" id="10_frwyw"]
-[ext_resource type="Script" uid="uid://5l0peb3midk2" path="res://game/effect.gd" id="11_tv0fx"]
-[ext_resource type="Script" uid="uid://cams685fgx1as" path="res://game/ability.gd" id="11_yyxey"]
-[ext_resource type="Script" uid="uid://uwsf3ltunoal" path="res://game/effects/damage_foe.gd" id="12_tv0fx"]
+[ext_resource type="PackedScene" uid="uid://dmg1yl43wwqrp" path="res://game/tower_scene.tscn" id="9_li27q"]
 
 [sub_resource type="Curve2D" id="Curve2D_5un7r"]
 _data = {
@@ -52,29 +48,9 @@ alpha_curve = SubResource("CurveTexture_wjctj")
 script = ExtResource("4_li27q")
 title = "wawa"
 speed = 512.0
-hp = 3
+hp = 1
 avatar = ExtResource("2_vop5m")
 metadata/_custom_type_script = "uid://cgogxsef3pau0"
-
-[sub_resource type="Resource" id="Resource_tv0fx"]
-script = ExtResource("10_frwyw")
-title = ""
-cost = 1
-cooldown = 2.0
-metadata/_custom_type_script = "uid://3ixnbicnkmx6"
-
-[sub_resource type="Resource" id="Resource_8ymx4"]
-script = ExtResource("12_tv0fx")
-damage_amount = 1
-metadata/_custom_type_script = "uid://uwsf3ltunoal"
-
-[sub_resource type="Resource" id="Resource_017dk"]
-script = ExtResource("11_yyxey")
-effects = Array[ExtResource("11_tv0fx")]([SubResource("Resource_8ymx4")])
-metadata/_custom_type_script = "uid://cams685fgx1as"
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_5un7r"]
-radius = 256.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_dgpao"]
 font = ExtResource("1_5un7r")
@@ -126,22 +102,8 @@ level = NodePath("../Level")
 [node name="TimerSpawn" type="Timer" parent="FoeManager"]
 autostart = true
 
-[node name="Tower" type="Node2D" parent="."]
+[node name="Tower" parent="." instance=ExtResource("9_li27q")]
 position = Vector2(1624, 533)
-script = ExtResource("2_5un7r")
-info = SubResource("Resource_tv0fx")
-ability = SubResource("Resource_017dk")
-
-[node name="Sprite2D" type="Sprite2D" parent="Tower"]
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("2_vop5m")
-
-[node name="AreaAttack" type="Area2D" parent="Tower"]
-collision_layer = 0
-collision_mask = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Tower/AreaAttack"]
-shape = SubResource("CircleShape2D_5un7r")
 
 [node name="Node2D" type="Node2D" parent="."]
 visible = false
