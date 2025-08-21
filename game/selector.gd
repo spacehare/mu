@@ -5,9 +5,17 @@ var _grabbed_object: Node2D = null
 @export var level: Level
 @onready var audio_error: AudioStreamPlayer2D = $AudioError
 @onready var audio_place: AudioStreamPlayer2D = $AudioPlace
+const COLOR_OK = Color.GREEN
+const COLOR_BAD = Color.RED
 
 signal grabbed(thing)
 signal dropped(thing)
+
+
+func _process(delta):
+	if _grabbed_object:
+		if _grabbed_object is TowerBase:
+			modulate = COLOR_OK if _grabbed_object.can_place() else COLOR_BAD
 
 
 func _input(event: InputEvent):
