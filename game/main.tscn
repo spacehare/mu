@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://k516ipke041h"]
+[gd_scene load_steps=37 format=3 uid="uid://k516ipke041h"]
 
 [ext_resource type="FontFile" uid="uid://b5rorpqfmljwy" path="res://assets/nasin-nanpa-4.0.0-UCSUR.otf" id="1_5un7r"]
 [ext_resource type="Script" uid="uid://g3a7vsdq4pna" path="res://game/debug.gd" id="1_xkbyp"]
@@ -18,6 +18,8 @@
 [ext_resource type="Texture2D" uid="uid://cnvtuu408pq30" path="res://assets/textures/bg_level1.png" id="6_wjctj"]
 [ext_resource type="Script" uid="uid://5m2oixuudxtq" path="res://game/level.gd" id="7_g6fv7"]
 [ext_resource type="PackedScene" uid="uid://dmg1yl43wwqrp" path="res://game/tower_scene.tscn" id="9_li27q"]
+[ext_resource type="AudioStream" uid="uid://b4pjgu0a63xfv" path="res://assets/sounds/error_ct.wav" id="10_rvc4y"]
+[ext_resource type="AudioStream" uid="uid://cd6c7qab2i85v" path="res://assets/sounds/tap_sfxr.wav" id="11_c08u8"]
 [ext_resource type="Script" uid="uid://hsvte4s2aq3r" path="res://game/ui/ui_hud.gd" id="12_frwyw"]
 [ext_resource type="Script" uid="uid://ckt1uywxsijl8" path="res://game/ui/ui_button_buy.gd" id="12_g6fv7"]
 [ext_resource type="Resource" uid="uid://ch7km5jf8cnyy" path="res://game/wares/ware_tower_base.tres" id="15_tv0fx"]
@@ -165,6 +167,14 @@ polygon = PackedVector2Array(-7, 607, 920, 864, 1193, 710, 1522, 619, 1702, 572,
 [node name="Selector" type="Node2D" parent="." node_paths=PackedStringArray("level")]
 script = ExtResource("5_m8y2r")
 level = NodePath("../Level")
+
+[node name="AudioError" type="AudioStreamPlayer2D" parent="Selector"]
+stream = ExtResource("10_rvc4y")
+volume_db = -5.0
+
+[node name="AudioPlace" type="AudioStreamPlayer2D" parent="Selector"]
+stream = ExtResource("11_c08u8")
+volume_db = -5.0
 
 [node name="FoeManager" type="Node" parent="." node_paths=PackedStringArray("path", "level")]
 script = ExtResource("2_ioaqv")
