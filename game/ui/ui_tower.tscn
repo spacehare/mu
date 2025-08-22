@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://d3umqdckvguwf"]
+
+[ext_resource type="Script" uid="uid://bksd22uso7l85" path="res://game/ui/ui_tower.gd" id="1_ubuse"]
+[ext_resource type="LabelSettings" uid="uid://cs48ewfvsnw8c" path="res://game/ui_res/button_label_settings.tres" id="1_ylsq4"]
+[ext_resource type="Script" uid="uid://dxrc0ouoa0kg1" path="res://game/label_sitelen.gd" id="2_ubuse"]
+[ext_resource type="PackedScene" uid="uid://p60muq7jwx21" path="res://game/ui/ui_buy_button.tscn" id="3_b3a7j"]
+
+[node name="UiTower" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 412.0
+offset_right = 412.0
+offset_bottom = 178.0
+script = ExtResource("1_ubuse")
+
+[node name="Box" type="BoxContainer" parent="."]
+offset_right = 408.0
+offset_bottom = 178.0
+
+[node name="LabelSitelen" type="Label" parent="Box"]
+layout_mode = 2
+text = "󱥊"
+label_settings = ExtResource("1_ylsq4")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("2_ubuse")
+input = "palisa"
+
+[node name="LabelTest" type="Label" parent="Box"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "test"
+
+[node name="ButtonBuy" parent="Box" instance=ExtResource("3_b3a7j")]
+layout_mode = 2

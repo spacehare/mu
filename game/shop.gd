@@ -8,6 +8,8 @@ extends Node
 var _rental: Node2D
 var _ware: Ware
 
+signal purchased(what: Node)
+
 func _ready():
 	selector.dropped.connect(_on_dropped)
 
@@ -19,7 +21,7 @@ func rent(ware: Ware):
 	elif selector.has_item():
 		print('selector is holding an item')
 		return
-		
+
 	var inst = ware.scene.instantiate()
 	_rental = inst
 	_ware = ware
@@ -29,10 +31,12 @@ func rent(ware: Ware):
 func _on_dropped(obj):
 	print('on dropped %s' % obj)
 	if obj == _rental:
-		buy(obj)
+		buy()
 
-	
-func buy(object: Node2D):
+
+func buy():
+	if _rental is TowerBase:
+		purchased.emit(_rental)
 	player.money.current -= _ware.price
 	_ware = null
 	_rental = null

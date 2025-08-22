@@ -13,6 +13,5 @@ func convert():
 	text_to_ucsur(input)
 
 
-
 func text_to_ucsur(value: String) -> void:
 	text = TokiPona.ucsurize(value)
