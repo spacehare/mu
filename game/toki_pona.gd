@@ -181,4 +181,4 @@ static func ucsurize(string: String) -> String:
 	for word in split:
 		var result: String = nimi.get(word, word)
 		output.push_back(result)
-	return ' '.join(output)
+	return ''.join(output)
