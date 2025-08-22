@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://k516ipke041h"]
+[gd_scene load_steps=38 format=3 uid="uid://k516ipke041h"]
 
 [ext_resource type="FontFile" uid="uid://b5rorpqfmljwy" path="res://assets/nasin-nanpa-4.0.0-UCSUR.otf" id="1_5un7r"]
 [ext_resource type="Script" uid="uid://g3a7vsdq4pna" path="res://game/debug.gd" id="1_xkbyp"]
@@ -24,6 +24,7 @@
 [ext_resource type="Script" uid="uid://ckt1uywxsijl8" path="res://game/ui/ui_button_buy.gd" id="12_g6fv7"]
 [ext_resource type="Resource" uid="uid://ch7km5jf8cnyy" path="res://game/wares/ware_tower_base.tres" id="15_tv0fx"]
 [ext_resource type="Script" uid="uid://dxfege8l5p255" path="res://game/ui/ui_display_container.gd" id="20_le3en"]
+[ext_resource type="Script" uid="uid://dxrc0ouoa0kg1" path="res://game/label_sitelen.gd" id="25_c08u8"]
 
 [sub_resource type="Resource" id="Resource_m8y2r"]
 resource_local_to_scene = true
@@ -155,13 +156,13 @@ polygon = PackedVector2Array(1429, 1091, 1699, 968, 1934, 880, 1936, 1089)
 [node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="Level/AreaRocks"]
 polygon = PackedVector2Array(940, 863, 970, 707, 139, 490, 55, 133, 120, 99, 115, -14, -24, -28, -12, 607)
 
-[node name="AreaRocks2" type="Area2D" parent="Level"]
+[node name="AreaPath" type="Area2D" parent="Level"]
 collision_layer = 64
 collision_mask = 0
 metadata/_edit_lock_ = true
 metadata/_edit_group_ = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level/AreaRocks2"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level/AreaPath"]
 polygon = PackedVector2Array(-7, 607, 920, 864, 1193, 710, 1522, 619, 1702, 572, 1710, 459, 1357, 507, 1092, 603, 942, 714, 131, 482, 59, 118, 117, 94, 501, 151, 868, 244, 1166, 174, 1559, 100, 1928, 83, 1930, 196, 1503, 227, 1049, 324, 946, 410, 877, 414, 683, 332, 262, 240, 223, 340, 916, 578, 1103, 463, 1351, 383, 1766, 293, 1813, 305, 1799, 687, 1404, 786, 1168, 866, 950, 1008, 597, 923, -11, 730)
 
 [node name="Selector" type="Node2D" parent="." node_paths=PackedStringArray("level")]
@@ -231,10 +232,12 @@ offset_right = 20.0
 offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "󱤋󱥄󱥃"
+text = "󱤋 󱥄 󱥃"
 label_settings = SubResource("LabelSettings_dgpao")
 horizontal_alignment = 1
 vertical_alignment = 1
+script = ExtResource("25_c08u8")
+input = "esun o noka"
 
 [node name="Button2" type="Button" parent="HUD"]
 layout_mode = 0
@@ -253,6 +256,8 @@ grow_vertical = 2
 text = "󱤤"
 label_settings = SubResource("LabelSettings_lx3aj")
 horizontal_alignment = 1
+script = ExtResource("25_c08u8")
+input = "lawa"
 
 [node name="BoxContainer" type="BoxContainer" parent="HUD" node_paths=PackedStringArray("player")]
 layout_mode = 0
@@ -271,3 +276,32 @@ text_hint = "󱥎"
 [node name="DisplayValueMoney" parent="HUD/BoxContainer" instance=ExtResource("1_xtpaf")]
 layout_mode = 2
 text_hint = "󱤲"
+
+[node name="BoxContainer2" type="BoxContainer" parent="HUD"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="HUD/BoxContainer2"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="LabelSitelen" type="Label" parent="HUD/BoxContainer2/Button"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.5
+offset_top = -24.0
+offset_right = 36.5
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "󱥬 󱤀"
+label_settings = SubResource("LabelSettings_dgpao")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("25_c08u8")
+input = "toki a"

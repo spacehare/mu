@@ -4,8 +4,8 @@
 
 [sub_resource type="Gradient" id="Gradient_1cq1t"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0.567073, 0.684959)
-colors = PackedColorArray(0.32272, 0.0901197, 0.126938, 1, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0, 0.7, 0.75)
+colors = PackedColorArray(1, 1, 1, 1, 0.32272, 0.0901197, 0.126938, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_f385x"]
 gradient = SubResource("Gradient_1cq1t")
@@ -36,6 +36,7 @@ grow_vertical = 2
 texture = SubResource("GradientTexture2D_f385x")
 
 [node name="AreaHitbox" type="Area2D" parent="."]
+visible = false
 collision_mask = 96
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AreaHitbox"]
