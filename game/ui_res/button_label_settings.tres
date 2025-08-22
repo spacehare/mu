@@ -1,0 +1,7 @@
+[gd_resource type="LabelSettings" load_steps=2 format=3 uid="uid://cs48ewfvsnw8c"]
+
+[ext_resource type="FontFile" uid="uid://b5rorpqfmljwy" path="res://assets/nasin-nanpa-4.0.0-UCSUR.otf" id="1_r1uts"]
+
+[resource]
+font = ExtResource("1_r1uts")
+font_size = 64

@@ -1,15 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://bjl3bk1ovts3r"]
+[gd_scene load_steps=3 format=3 uid="uid://bjl3bk1ovts3r"]
 
 [ext_resource type="Script" uid="uid://bpsd5rxlwn63m" path="res://game/ui/ui_display_value.gd" id="1_bnbge"]
+[ext_resource type="Script" uid="uid://dxrc0ouoa0kg1" path="res://game/label_sitelen.gd" id="2_q6ti4"]
 
 [node name="DisplayValue" type="BoxContainer"]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 339.0
+offset_bottom = 178.0
 script = ExtResource("1_bnbge")
+text_hint = "seme"
 
 [node name="Label" type="Label" parent="."]
 layout_mode = 2
 text = "󱥙"
+script = ExtResource("2_q6ti4")
 
 [node name="Label2" type="Label" parent="."]
 layout_mode = 2

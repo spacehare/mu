@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://p60muq7jwx21"]
+
+[ext_resource type="Script" uid="uid://ckt1uywxsijl8" path="res://game/ui/ui_button_buy.gd" id="1_lneix"]
+[ext_resource type="Resource" uid="uid://ch7km5jf8cnyy" path="res://game/wares/ware_tower_base.tres" id="2_56gna"]
+[ext_resource type="LabelSettings" uid="uid://cs48ewfvsnw8c" path="res://game/ui_res/button_label_settings.tres" id="3_iqu6y"]
+[ext_resource type="Script" uid="uid://dxrc0ouoa0kg1" path="res://game/label_sitelen.gd" id="4_ss3r6"]
+
+[node name="ButtonBuy" type="Button"]
+custom_minimum_size = Vector2(128, 128)
+script = ExtResource("1_lneix")
+ware = ExtResource("2_56gna")
+
+[node name="LabelSitelen" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -36.5
+offset_top = -24.0
+offset_right = 36.5
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "󱥀"
+label_settings = ExtResource("3_iqu6y")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("4_ss3r6")
+input = "nena"
