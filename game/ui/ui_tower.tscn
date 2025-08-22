@@ -7,19 +7,34 @@
 
 [node name="UiTower" type="Control"]
 layout_mode = 3
-anchors_preset = 0
-offset_left = 412.0
-offset_right = 412.0
-offset_bottom = 178.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_ubuse")
 
-[node name="Box" type="BoxContainer" parent="."]
-layout_mode = 0
-offset_right = 408.0
-offset_bottom = 178.0
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="Box" type="BoxContainer" parent="MarginContainer/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 vertical = true
 
-[node name="LabelSitelen" type="Label" parent="Box"]
+[node name="LabelSitelen" type="Label" parent="MarginContainer/Panel/Box"]
 layout_mode = 2
 text = "󱥊"
 label_settings = ExtResource("1_ylsq4")
@@ -28,17 +43,18 @@ vertical_alignment = 1
 script = ExtResource("2_ubuse")
 input = "palisa"
 
-[node name="LabelTest" type="Label" parent="Box"]
+[node name="LabelTest" type="Label" parent="MarginContainer/Panel/Box"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "test"
 
-[node name="LabelPieces" type="Label" parent="Box"]
+[node name="LabelPieces" type="Label" parent="MarginContainer/Panel/Box"]
 unique_name_in_owner = true
 layout_mode = 2
 text = "󱥊󱤓󱤂"
 script = ExtResource("2_ubuse")
 input = "palisa jo ala"
 
-[node name="ButtonBuy" parent="Box" instance=ExtResource("3_b3a7j")]
+[node name="ButtonBuy" parent="MarginContainer/Panel/Box" instance=ExtResource("3_b3a7j")]
+visible = false
 layout_mode = 2

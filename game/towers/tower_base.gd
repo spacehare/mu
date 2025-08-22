@@ -3,7 +3,7 @@ extends Node2D
 
 @onready var hitbox: Area2D = $AreaHitbox
 signal selected(tower: TowerBase)
-var pieces := []
+var pieces: Array[TowerPiece] = []
 
 func _ready() -> void:
 	hitbox.input_event.connect(_on_input_event)
